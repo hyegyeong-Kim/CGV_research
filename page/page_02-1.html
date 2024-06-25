@@ -10,7 +10,7 @@
     <title>Document</title>
     <style>
         .wrap {display:flex; justify-content:center;}
-
+        .inner > .wrap {display:block;}
         img {max-width:100%; display:block;}
         /* .title_wrap {height:870px;} */
         /* .text_wrap > dl, .text_wrap > ul {visibility:hidden; transform:translateX(100%); transition:0.25s; opacity:0;} */
@@ -20,8 +20,7 @@
         .text_wrap > dl > * {margin-bottom:50px; font-size:28px;}
         .text_wrap > ul > li > p {margin-top:50px; font-size:28px;}
         .text_wrap.active{transform:translateX(0);}
-        .inner {width:415px; height:870px; background:url('../image/device_2.png') no-repeat; position:relative;}
-        .inner {padding:10px 12px 30px 10px; display:flex; flex-direction:column; overflow:hidden;}
+        .inner {width:415px; height:870px; padding:10px 12px 30px 10px; background:url('../image/device_2.png') no-repeat; display:flex; flex-direction:column; position:relative; overflow:hidden; }
         .inner > .wrap {flex:1; overflow:auto}
         .header {width:100%; padding:0 9px 0 4px; border-radius:51px 51px 0 0;}
         .footer {width:100%; padding:0 8px 0 2px; border-radius:0 0 57px 57px}
@@ -40,6 +39,7 @@
         .show {opacity:1 !important;}
         .bg {width: 402px; height: 844px; border-radius:60px; background:rgba(0, 0, 0, 0.5); position:absolute; left:4px; right:0; bottom:2px; top:0; z-index:1; display: block; opacity:0; transition:0.2s;}
         .bg.show {opacity:1; z-index:1;}
+        .view {position:relative; z-index:5;}
         
     </style>
     <script>
@@ -78,11 +78,70 @@
                                             $('.cont > ul > .type_sw').removeClass('show')
                                             $('.cont > ul > .type_list').removeClass('show')
                                             $('.bg').addClass('show')
-                                            $('.wrap > .cont').addClass('zindex')
                                             $('.text_wrap > dl').eq(4).removeClass('show');
                                             $('.text_wrap > dl').eq(5).addClass('show');
-                                        },5000)
-                                    },3000)
+                                                setTimeout(()=>{
+                                                $('.bg').addClass('show')
+                                                $('.text_wrap > dl').eq(5).removeClass('show');
+                                                $('.text_wrap > dl').eq(6).addClass('show');
+                                                setTimeout(()=>{
+                                                    $('.cont > .str').addClass('view')
+                                                    $('.wrap').animate({
+                                                        scrollTop : $('.cont').height()
+                                                    },500, function(){
+                                                        setTimeout(()=>{
+                                                            $('.wrap').animate({
+                                                                scrollTop : 0
+                                                            },500, function(){
+                                                                $('.cont > .str').removeClass('view')
+                                                            })
+                                                        })
+                                                    })
+                                                    setTimeout(()=>{
+                                                        $('.text_wrap > dl').eq(6).removeClass('show');
+                                                        $('.text_wrap > dl').eq(7).addClass('show');
+                                                            setTimeout(()=>{
+                                                            $('.header').attr('src','../image/movie/header.png')
+                                                            $('.cont').html(
+                                                                `
+                                                                <img class="str" src="../image/movie/01.png" alt="">
+                                                                <img src="../image/movie/02.png" alt="">
+                                                                <img src="../image/movie/03.png" alt="">
+                                                                <img src="../image/movie/04.png" alt="">
+                                                                <img src="../image/movie/05.png" alt="">
+                                                                <img class="str"  src="../image/movie/06.png" alt="">
+                                                                <img src="../image/movie/07.png" alt="">
+                                                                <img src="../image/movie/08.png" alt="">
+                                                                <img src="../image/movie/09.png" alt="">
+                                                                <img class="str"  src="../image/movie/10.png" alt="">
+                                                                <img src="../image/movie/11.png" alt="">
+                                                                `)    
+                                                            $('.text_wrap > dl').eq(7).removeClass('show');
+                                                            $('.text_wrap > dl').eq(8).addClass('show');
+                                                            setTimeout(()=>{
+                                                                $('.text_wrap > dl').eq(8).removeClass('show');
+                                                                $('.text_wrap > ul').addClass('show');
+                                                                setTimeout(()=>{
+                                                                    $('.cont > .str').addClass('view')
+                                                                    $('.wrap').animate({
+                                                                        scrollTop : $('.cont').height()
+                                                                    },500, function(){
+                                                                        setTimeout(()=>{
+                                                                            $('.wrap').animate({
+                                                                            scrollTop:0
+                                                                            },500, function(){
+                                                                                $('.cont > .str').removeClass('view')
+                                                                            })
+                                                                        })
+                                                                    })
+                                                                },2000)
+                                                            },)
+                                                        },3000)
+                                                    },4500)
+                                                },4000)
+                                            },3500)
+                                        },3000)
+                                    },2500)
                                 },2000)  
                             },1500)
                         } )
@@ -90,6 +149,7 @@
                 } )
             },500);  
         });
+        
 
         const device = {
             start: function(){
@@ -112,22 +172,23 @@
             <img class="header" src="../image/main_header.png" alt="">
             <div class="wrap">
                <div class="cont">
-                <ul>
-                    <li class="type_sw"><img src="../image/01.png" alt=""></li>
-                    <li class="type_list"><img src="../image/01_1.png" alt=""></li>
-                </ul>
-                <img src="../image/02.png" alt="">
-                <img src="../image/03.png" alt="">
-                <img src="../image/04.png" alt="">
-                <img src="../image/05.png" alt="">
-                <img src="../image/06.png" alt="">
-                <img src="../image/07.png" alt="">
-                <img src="../image/08.png" alt="">
-                <img src="../image/10.png" alt="">
-                <img src="../image/11.png" alt="">
-                <img src="../image/12.png" alt="">
-                <img src="../image/13.png" alt="">
-                <img src="../image/14.png" alt="">
+                    <ul>
+                        <li class="type_sw"><img src="../image/01.png" alt=""></li>
+                        <li class="type_list"><img src="../image/01_1.png" alt=""></li>
+                    </ul>
+                    <img class="str" src="../image/02.png" alt="">
+                    <img src="../image/03.png" alt="">
+                    <img class="str" src="../image/04.png" alt="">
+                    <img src="../image/05.png" alt="">
+                    <img class="str" src="../image/06.png" alt="">
+                    <img src="../image/07.png" alt="">
+                    <img src="../image/08.png" alt="">
+                    <img class="str" src="../image/09.png" alt="">
+                    <img src="../image/10.png" alt="">
+                    <img src="../image/11.png" alt="">
+                    <img src="../image/12.png" alt="">
+                    <img src="../image/13.png" alt="">
+                    <img class="str" src="../image/14.png" alt="">
                </div>
             </div>
             <img class="footer" src="../image/TabBar.png" alt="">
